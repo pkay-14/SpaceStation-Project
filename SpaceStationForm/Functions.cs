@@ -6,25 +6,13 @@ using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace SpaceStation
+namespace SpaceStationForm
 {
-    class Person
+    class Functions
     {
         public int reply;
-        public int id;
-        public string firstname;
-        public string lastname;
-        public string gender;
-        public DateTime DateofBirth;
-        public int age;
-        public string address;
-        public string phone;
-        public string email;
-        public string password;
-        public string report;
 
-
-        public void Login(string firstname, string lastname, string password)
+        public int Login(string firstname, string surname, string password)
         {
             SqlConnectionStringBuilder connectionstring = new SqlConnectionStringBuilder();
 
@@ -40,19 +28,19 @@ namespace SpaceStation
                 SqlCommand myCommand = new SqlCommand("personlogin", myConnection);
                 myCommand.CommandType = CommandType.StoredProcedure;
                 myCommand.Parameters.AddWithValue("@FN", firstname);
-                myCommand.Parameters.AddWithValue("@LN", lastname);
+                myCommand.Parameters.AddWithValue("@LN", surname);
                 myCommand.Parameters.AddWithValue("@PW", password);
 
 
                 myConnection.Open();
-              //  myCommand.ExecuteNonQuery();
+                //  myCommand.ExecuteNonQuery();
 
                 int userindatabase = (int)myCommand.ExecuteScalar();
-                if (userindatabase==1)
+                if (userindatabase == 1)
                 {
                     reply = 1;
-                   // Console.ForegroundColor = ConsoleColor.Green;
-                   // Console.WriteLine( Console.ForegroundColor);
+                    // Console.ForegroundColor = ConsoleColor.Green;
+                    // Console.WriteLine( Console.ForegroundColor);
 
 
                 }
@@ -60,25 +48,13 @@ namespace SpaceStation
                 {
                     reply = -1;
                     //Console.ForegroundColor = ConsoleColor.Red;
-                   // Console.WriteLine(reply, Console.ForegroundColor);
+                    // Console.WriteLine(reply, Console.ForegroundColor);
                 }
 
-
+                return reply;
             }
         }
-
-        public void Print() { }
-
-        public string Get_Information()
-        {
-            string info = "";
-            return info;
-        }
-
-        public void Contact() { }
-
-        public void Logout() { }
-
-        public void Save() {/*change to DataTable*/  }
+    
+       
     }
 }
